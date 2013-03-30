@@ -13,16 +13,15 @@
 	</ul>
 </blockquote>
 <p>If the <strong>extra</strong> is string or number,it will be the parameters for the initazation</p>
+<p>The Class instance has a method <strong>extend(object)</strong> which is used to add attributes for the current object.</p>
 <h2>Demos</h2>
 <p>Below are some examples how to use Class.js</p>
 <strong>#demo1</strong>
 <pre>
-<code>
-	function Animal(){
+	<code>function Animal(){
 		this.type = 'Animal';
 	}
-	var animal = new Class(Animal);
-</code>
+	var animal = new Class(Animal);</code>
 </pre>
 <p>Output:</p>
 <pre>{
@@ -34,8 +33,7 @@
 }</pre>
 <strong>#demo2</strong>
 <pre>
-<code>
-	function Dog(color){
+<code>function Dog(color){
 		this.type = 'Dog';
 		this.color = color;
 	}
@@ -46,8 +44,7 @@
 		},
 		paras:['blue']
 	})
-	console.log(dog)	
-</code>
+	console.log(dog)</code>
 </pre>
 <p>Output:</p>
 <pre>{
@@ -62,8 +59,7 @@
 }</pre>
 <strong>#demo3</strong>
 <pre>
-<code>
-	var object = {
+<code>var object = {
 		name:'Object',
 		init:function(paras){
 			this.type = 'demo';
@@ -71,8 +67,7 @@
 		}
 	}
 	var object1 = new Class(object,'this is paras');
-	console.log(object1)	
-</code>
+	console.log(object1)</code>
 </pre>
 <p>Output:</p>
 <pre>{
@@ -86,15 +81,13 @@
 }</pre>
 <strong>#demo4</strong>
 <pre>
-<code>
-	var object2 = new Class(object,{
+<code>var object2 = new Class(object,{
 		extend:{
 			newName:'object2'
 		},
 		paras:['demo2']
 	})
-	console.log(object2)	
-</code>
+	console.log(object2)</code>
 </pre>
 <p>Output:</p>
 <pre>{
