@@ -1,102 +1,105 @@
-<h1>Class.js - A Class Constructor For Javascript</h1>
-<p><a href="https://github.com/abcrun/Class">Class.js</a> is a constructor for javascript. You can use it to create object easily.</p>
-<h2>How to use it</h2>
-<p>We can use it with new operator: <strong>new Class(con,extra)</strong></p>
-<p>The argument <strong>con</strong> can be a <strong>Function</strong> or an <strong>Object</strong> which is the original object, and the <strong>extra</strong> is an <strong>Object</strong>, <strong>Number</strong> or <strong>String</strong>.</P> 
-<p>When <strong>extra</strong> is an object,it can include some of the values below:</p>
-<blockquote>
-	<ul>
-		<li>inherit: The parent object</li>
-		<li>extend: Attributes to be extended</li>
-		<li>init: Initiazation when creates the object</li>
-		<li>paras: The parameter for initazation</li>
-	</ul>
-</blockquote>
-<p>If the <strong>extra</strong> is string or number,it will be the parameters for the initazation</p>
-<p>The Class instance has a method <strong>extend(object)</strong> which is used to add attributes for the current object.</p>
-<h2>Demos</h2>
-<p>Below are some examples how to use Class.js</p>
-<strong>#demo1</strong>
-<pre>
-	<code>function Animal(){
-		this.type = 'Animal';
-	}
-	var animal = new Class(Animal);</code>
-</pre>
-<p>Output:</p>
-<pre>{
-	type: "Animal",
-	__proto__:{
-		extend:function
-	}
-	...
-}</pre>
-<strong>#demo2</strong>
-<pre>
-<code>function Dog(color){
-		this.type = 'Dog';
-		this.color = color;
-	}
-	var dog = new Class(Dog,{
-		inherit:animal,
-		extend:{
-			saying:'Wang Wang ~~~'
-		},
-		paras:['blue']
+# Class.js
+---
+
+A Simple Way To Create Class With Extends And Implementation In Javascript (OOP)
+
+基于OOP的Javascipt实现
+
+---
+
+
+## Define and Usage (用法)
+### Syntax (语法)
+	Class([main,extends,parameters])
+	Class.create([properties])
+### Parameters (参数)
+###### Class([main,extends,parameters])
+- `main:Optional` -- A function or an object as the constructor. If it is an object, it may have an init method as the constructor,and others will be the attribute.)
+- `extends:Optional` -- A function or an object to be inherited as the parent.
+- `parameters:Optional` -- The parameters of the constructor for instance.
+
+###### Class.create([properties])
+`properties`
+- `constructor:Optional` -- Used as main in `Class([main,extends,parameters])`.
+- `extends:Optional` -- Used as extends in `Class([main,extends,parameters]).
+- `parameters:Optional` -- Used as parameters in `Class([main,extends,parameters])`.
+- `implements:Optional` -- Used to add new attribute.
+
+### Methods (方法)
+- `extends(parent)` -- Inherit the parent 
+- `implements(properties)` -- Add properties to the current object
+
+## Examples (实例)
+`Class([main,extends,parameters])`
+
+Let's create an object called Animal and an object Dog which inherits Animal.
+
+	var Animal = Class(function(){
+		this.type = 'animal';
 	})
-	console.log(dog)</code>
-</pre>
-<p>Output:</p>
-<pre>{
-	type: "Dog",
-	saying: "Wang Wang",
-	color: "blue",
-	__proto__:{
-		type: "Animal",
-		extend:function
-	}
-	...
-}</pre>
-<strong>#demo3</strong>
-<pre>
-<code>var object = {
-		name:'Object',
-		init:function(paras){
-			this.type = 'demo';
-			this.paras = paras;
+	var Dog = Class(
+		function(name){
+			this.name = name;
+		},
+		Animal,
+		'dog'
+	)
+
+**Notice**: The `parameters` can be an array if there are more arguments in the constuctor. If the `parameters` is an object and the current class has no parent, `extends` should be set to null or undefind.
+
+The codes `Dog` above is the same as below:
+
+	var Dog = Class.create({
+		constructor:function(name){
+			this.name = name;
+		},
+		extends:Animal,
+		parameters:'dog'
+	})
+	var Dog = Class(
+		{
+			init:function(name){
+				this.name = name;
+			}
+		},
+		Animal,
+		['dog']
+	)
+	var Dog = Class(function(name){
+		this.name = name;
+	},'dog').extends(Animal);
+	
+We can add properties throw `implements` method.
+
+	Dog.implements({
+		saying:'wangwang~~',
+		color:'blue'
+	})
+	
+We can also change the parent object.
+
+	Dog = Dog.extends(object)
+	
+**Notice**:We can't change the parent throw `extends` method without pointing to a variable.
+
+The parameter `main` or `constructor` can be an object with properties which will be implements in the class
+
+	var Person = Class({
+		init:function(age){
+			this.age = age;
+		},
+		eyes:'two',
+		language:'Chinese'
+	})
+
+It is the same as:
+
+	var Person = Class({
+		init:function(age){
+			this.age = age;
 		}
-	}
-	var object1 = new Class(object,'this is paras');
-	console.log(object1)</code>
-</pre>
-<p>Output:</p>
-<pre>{
-	name: "Object",
-	paras: "this is paras",
-	type: "demo",
-	__proto__:{
-		extend:function
-	}
-	...
-}</pre>
-<strong>#demo4</strong>
-<pre>
-<code>var object2 = new Class(object,{
-		extend:{
-			newName:'object2'
-		},
-		paras:['demo2']
+	}).implements({
+		eyes:'two',
+		language:'Chinese'
 	})
-	console.log(object2)</code>
-</pre>
-<p>Output:</p>
-<pre>{
-	name: "Object",
-	newName: "object2",
-	paras: "demo2",
-	type: "demo",
-	__proto__:{
-		extend:function
-	}
-	...
-}</pre>
+
