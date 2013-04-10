@@ -9,6 +9,7 @@ A Simple Way To Create Class With Extends And Implementation In Javascript (OOP)
 
 
 ## Define and Usage (用法)
+
 ### Syntax (语法)
 	Class([main,extends,parameters])
 	Class.create([properties])
@@ -103,3 +104,5 @@ It is the same as:
 		language:'Chinese'
 	})
 
+
+**Notice**:Compatible with AMD and CommonJS
