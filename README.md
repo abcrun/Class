@@ -1,7 +1,7 @@
 # Class.js
 ---
 
-A Simple Way To Create Class With Extends And Implementation In Javascript (OOP)
+A Simple Way To Create Classes With `extends` And `implements` In Javascript (OOP)
 
 基于OOP的Javascipt实现
 
@@ -15,16 +15,16 @@ A Simple Way To Create Class With Extends And Implementation In Javascript (OOP)
 	Class.create([properties])
 ### Parameters (参数)
 ###### Class([main,extends,parameters])
-- `main:Optional` -- A function or an object as the constructor. If it is an object, it may have an init method as the constructor,and others will be the attribute.)
+- `main:Optional` -- A function or an object as the constructor. If it is an object, it may have an init method as the constructor,and others will be the attributes.
 - `extends:Optional` -- A function or an object to be inherited as the parent.
 - `parameters:Optional` -- The parameters of the constructor for instance.
 
 ###### Class.create([properties])
 `properties`
 - `constructor:Optional` -- Used as main in `Class([main,extends,parameters])`.
-- `extends:Optional` -- Used as extends in `Class([main,extends,parameters]).
+- `extends:Optional` -- Used as extends in `Class([main,extends,parameters])`.
 - `parameters:Optional` -- Used as parameters in `Class([main,extends,parameters])`.
-- `implements:Optional` -- Used to add new attribute.
+- `implements:Optional` -- Used to add new attributes.
 
 ### Methods (方法)
 - `extends(parent)` -- Inherit the parent 
