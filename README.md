@@ -81,8 +81,6 @@ We can also change the parent object.
 
 	Dog = Dog.extends(object)
 	
-**Notice**:We can't change the parent throw `extends` method without pointing to a variable.
-
 The parameter `main` or `constructor` can be an object with properties which will be implements in the class
 
 	var Person = Class({
