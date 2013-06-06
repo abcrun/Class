@@ -1,8 +1,8 @@
 /**
 * A Simple Way To Create Class With Extends And Implementation In Javascript (OOP)
-* The MIT License - Copyright (c) Hongbo Yang <abcrun@gmail.com>
+* The MIT License - Copyright (c) 2013 Hongbo Yang <abcrun@gmail.com>
 * Repository - https://github.com/abcrun/Class.git
-* Version - 0.2.0
+* Version - 0.3.0
 */
 
 (function(name,factory){
@@ -19,7 +19,7 @@
 		};
 
 	var _inherits = function(_extends){
-		return Class(this,_extends);
+		return klass(this,_extends);
 	}
 	var _implements = function(_implements){
 		for(key in _implements){
@@ -28,12 +28,12 @@
 		return this;
 	}
 
-	var Class = function(main,_extends,parameters){
+	var klass = function(main,_extends,parameters){
 		var _prop,main_type = type(main),extends_type = type(_extends),F = new Function();
 
 		//Format Arguments
-		main = main_type === 'function' ? [main] :
-			main_type === 'object' ? (_prop = main) && [main.init || function(){}] :
+		main = main_type == 'function' ? [main] :
+			main_type == 'object' ? (_prop = main) && [main['main'] || function(){}] :
 			[function(){}];
 		_extends = extends_type === 'function' ? (main = main.concat(_extends)) && _extends.prototype :
 			extends_type === 'object' ? _extends :
@@ -44,9 +44,10 @@
 			parameters;
 
 		//Prototype Chain
-		if(_extends) F.prototype = _extends;
-		F.prototype.extends = _inherits;
-		F.prototype.implements = _implements;
+		_extends = _extends || {};
+		if(!_extends.extends) _extends.extends = _inherits;
+		if(!_extends.implements) _extends.implements = _implements;
+		F.prototype = _extends;
 
 		//Instance Constructor
 		var _class = new F();
@@ -57,10 +58,28 @@
 		return _class;
 	}
 
+	var isConsObj = function(obj){
+		for(key in obj){
+			if(hasOwn.call(obj,key)){
+				if(!/main|extends|parameters|implements/.test(key)) return false;
+				else return true;
+			}
+		}
+	}
+
+	var Class = {};
 	Class.create = function(){
-		var arg = arguments[0],main = function(){},_extends,parameters,_implements;
-		if(arg) main = arg.constructor,_extends = arg.extends,parameters = arg.parameters,_implements = arg.implements;
-		return Class(main,_extends,parameters).implements(_implements)
+		var arg = arguments;
+		if(arg.length == 1 && type(arg) == 'object' && isConsObj(arg[0])){
+			arg = arg[0];
+			var main = arg.main || function(){},
+				_extends = arg.extends,
+				parameters = arg.parameters,
+				_implements = arg.implements;
+			return klass(main,_extends,parameters).implements(_implements)
+		}else{
+			return klass.apply(this,arg)
+		}
 	}
 	
 

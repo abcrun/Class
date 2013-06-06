@@ -4,3 +4,6 @@
 	* Optimize the arguments
 	* Add a new way to create class: Class.create()
 	* Add original methods: .extends() .implements()
+### Version (0.3.0)
+	* Fixed the bug of prototype chain setting (F.prototype)
+	* Combined Class() and Class.create();

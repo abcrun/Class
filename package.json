@@ -1,12 +1,12 @@
 {
   "name": "Class.js",
   "description": "A Simple Way To Create Class With Extends And Implementation In Javascript (OOP)",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "keywords": ["class","prototype","extends","implements","Javascript","OOP"],
   "author": "Hongbo Yang <abcrun@gmail.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/abcrun/Class.git"
   },
-  "main": "./lib/Class.js"
+  "main": "./Class.js"
 }
