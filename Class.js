@@ -59,12 +59,16 @@
 	}
 
 	var isConsObj = function(obj){
+		var bl = true;
 		for(key in obj){
 			if(hasOwn.call(obj,key)){
-				if(!/main|extends|parameters|implements/.test(key)) return false;
-				else return true;
+				if(!/main|extends|parameters|implements/.test(key)){
+					bl = false;
+					break;
+				}
 			}
 		}
+		return bl;
 	}
 
 	var Class = {};
