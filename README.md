@@ -11,34 +11,33 @@ A Simple Way To Create Classes With `extends` And `implements` In Javascript (OO
 ## Define and Usage (用法)
 
 ### Syntax (语法)
-	Class([main,extends,parameters])
-	Class.create([properties])
+	Class.create([properties] || [main,extends,parameters])
 ### Parameters (参数)
-###### Class([main,extends,parameters])
-- `main:Optional` -- A function or an object as the constructor. If it is an object, it may have an init method as the constructor,and others will be the attributes.
+###### Class.create([main,extends,parameters])
+- `main:Optional` -- A function or an object as the constructor. If it is an object, it may have an main method as the constructor,and others will be the properties.
 - `extends:Optional` -- A function or an object to be inherited as the parent.
 - `parameters:Optional` -- The parameters of the constructor for instance.
 
 ###### Class.create([properties])
 `properties`
-- `constructor:Optional` -- Used as main in `Class([main,extends,parameters])`.
-- `extends:Optional` -- Used as extends in `Class([main,extends,parameters])`.
-- `parameters:Optional` -- Used as parameters in `Class([main,extends,parameters])`.
+- `main:Optional` -- Used as main in `Class.create([main,extends,parameters])`.
+- `extends:Optional` -- Used as extends in `Class.create([main,extends,parameters])`.
+- `parameters:Optional` -- Used as parameters in `Class.create([main,extends,parameters])`.
 - `implements:Optional` -- Used to add new attributes.
 
 ### Methods (方法)
 - `extends(parent)` -- Inherit the parent 
 - `implements(properties)` -- Add properties to the current object
 
-## Examples (实例)
-`Class([main,extends,parameters])`
+### Examples (实例)
+`Class.create([main,extends,parameters])`
 
 Let's create an object called Animal and an object Dog which inherits Animal.
 
-	var Animal = Class(function(){
+	var Animal = Class.create(function(){
 		this.type = 'animal';
 	})
-	var Dog = Class(
+	var Dog = Class.create(
 		function(name){
 			this.name = name;
 		},
@@ -51,22 +50,22 @@ Let's create an object called Animal and an object Dog which inherits Animal.
 The codes `Dog` above is the same as below:
 
 	var Dog = Class.create({
-		constructor:function(name){
+		main:function(name){
 			this.name = name;
 		},
 		extends:Animal,
 		parameters:'dog'
 	})
-	var Dog = Class(
+	var Dog = Class.create(
 		{
-			init:function(name){
+			main:function(name){
 				this.name = name;
 			}
 		},
 		Animal,
 		['dog']
 	)
-	var Dog = Class(function(name){
+	var Dog = Class.create(function(name){
 		this.name = name;
 	},'dog').extends(Animal);
 	
@@ -83,8 +82,8 @@ We can also change the parent object.
 	
 The parameter `main` or `constructor` can be an object with properties which will be implements in the class
 
-	var Person = Class({
-		init:function(age){
+	var Person = Class.create({
+		main:function(age){
 			this.age = age;
 		},
 		eyes:'two',
@@ -93,8 +92,8 @@ The parameter `main` or `constructor` can be an object with properties which wil
 
 It is the same as:
 
-	var Person = Class({
-		init:function(age){
+	var Person = Class.create({
+		main:function(age){
 			this.age = age;
 		}
 	}).implements({
