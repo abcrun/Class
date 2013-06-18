@@ -2,7 +2,7 @@
 * A Simple Way To Create Class With Extends And Implementation In Javascript (OOP)
 * The MIT License - Copyright (c) 2013 Hongbo Yang <abcrun@gmail.com>
 * Repository - https://github.com/abcrun/Class.git
-* Version - 0.3.0
+* Version - 0.4.0
 */
 
 (function(name,factory){
@@ -10,81 +10,63 @@
 	else if(typeof module === 'object' && module.exports) module.exports = factory();//CommonJS
 	else this[name] = factory();//Global
 })('Class',function(){
-	var hasOwn = Object.hasOwnProperty,
-		type = function(arg){
-			return arg === null ? 'null' :
-				arg === undefined ? 'undefined' :
-				typeof arg === 'function' ? 'function' :
-				/\s(\w+)/.exec(toString.call(arg).toLowerCase())[1];
-		};
+	var type = function(arg){
+		return arg === null ? 'null' :
+			arg === undefined ? 'undefined' :
+			typeof arg === 'function' ? 'function' :
+			/\s(\w+)/.exec(toString.call(arg).toLowerCase())[1];
+	};
 
-	var _inherits = function(_extends){
-		return klass(this,_extends);
-	}
-	var _implements = function(_implements){
-		for(key in _implements){
-			if(hasOwn.call(_implements,key)) this[key] = _implements[key];
-		}
+	var _implement = function(_extends){
+		for(key in _extends) this[key] = _extends[key];
 		return this;
 	}
+	var _set = function(name,value){
+		this[name] = value;
+		return this;
+	}
+	var _get = function(name){
+		return this[name];
+	}
 
-	var klass = function(main,_extends,parameters){
-		var _prop,main_type = type(main),extends_type = type(_extends),F = new Function();
+	var klass = function(_constutor,_extends){
+		var _prop,constructor_type = type(_constutor),extends_type = type(_extends);
 
 		//Format Arguments
-		main = main_type == 'function' ? [main] :
-			main_type == 'object' ? (_prop = main) && [main['main'] || function(){}] :
+		_constutor = constructor_type == 'function' ? [_constutor] :
+			constructor_type == 'object' ? (_prop = _constutor) && [_constutor['init'] || function(){}] :
 			[function(){}];
-		_extends = extends_type === 'function' ? (main = main.concat(_extends)) && _extends.prototype :
-			extends_type === 'object' ? _extends :
-			extends_type === 'array' ? (parameters = _extends) && null :
-			/(?:number|string)/.test(extends_type) ? (parameters = [_extends]) && null :
-			null;
-		parameters = parameters && type(parameters) !== 'array' ? [parameters] :
-			parameters;
+		_extends = extends_type === 'function' ? (_constutor = _constutor.concat(_extends)) && _extends.prototype :
+			extends_type === 'object' ? _extends : null;
 
 		//Prototype Chain
 		_extends = _extends || {};
-		if(!_extends.extends) _extends.extends = _inherits;
-		if(!_extends.implements) _extends.implements = _implements;
-		F.prototype = _extends;
+		_extends.set = _extends.set || _set;
+		_extends.get = _extends.get || _get;
+		_extends.extends = _extends.extends || _implement;
 
-		//Instance Constructor
-		var _class = new F();
-		while(main.length) main.shift().apply(_class,parameters);
-		if(_prop) _implements.call(_class,_prop);
+		//Constructor
+		if(_prop) delete _prop.init;
+		var _class = function(){
+			for(var i = 0; i < _constutor.length; i++) _constutor[i].apply(this,arguments);
+			if(_prop) _implement.call(this,_prop);
+		}
+		_class.prototype = _extends;
 
-		main = _extends = parameters = _prop = null;
+		//Static Methods
+		_class.extends = function(arg){
+			arg.set = arg.set || _set;
+			arg.get = arg.get || _set;
+			arg.extends = arg.extends || _implement;
+
+			_class.prototype = arg;
+		}
+
 		return _class;
 	}
 
-	var isConsObj = function(obj){
-		var bl = true;
-		for(key in obj){
-			if(hasOwn.call(obj,key)){
-				if(!/main|extends|parameters|implements/.test(key)){
-					bl = false;
-					break;
-				}
-			}
-		}
-		return bl;
-	}
-
 	var Class = {};
-	Class.create = function(){
-		var arg = arguments;
-		if(arg.length == 1 && type(arg) == 'object' && isConsObj(arg[0])){
-			arg = arg[0];
-			var main = arg.main || function(){},
-				_extends = arg.extends,
-				parameters = arg.parameters,
-				_implements = arg.implements;
-			return klass(main,_extends,parameters).implements(_implements)
-		}else{
-			return klass.apply(this,arg)
-		}
-	}
+	Class.create = klass;
 	
 
 	return Class;
