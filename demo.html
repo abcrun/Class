@@ -9,36 +9,35 @@
 </body>
 <script type="text/javascript" src="Class.js"></script>
 <script type="text/javascript">
+//Aminal Class
 var Animal = Class.create(function(){
     this.type = 'animal';
 });
-/*var Dog = Class.create(
+//Dog Class,Animal is the super Class of Dog
+var Dog = Class.create(
     function(name){
         this.name = name;
     },
-    Animal,
-    'dog'
-);*/
-/*var Dog = Class.create({
-    main:function(name){
+    Animal
+);
+//Dog Class,,Animal is the super Class of Dog
+var Dog = Class.create({
+    init:function(name){
         this.name = name;
     },
-    extends:Animal,
-    parameters:'dog'
-})*/
-/*var Dog = Class.create(
-    {
-        main:function(name){
-            this.name = name;
-        }
-    },
-    Animal,
-    ['dog']
-)*/
-/*var Dog = Class.create(function(name){
-    this.name = name;
-},'dog').extends(Animal);*/
+	feet:4
+},Animal);
+//Change the super Class
+Dog.extends({saying:'wangwang'});
 
+var dog1 = new Dog('doudou');
+//Expands property
+dog1.extends({
+	color:'brown',
+	run:function(){
+		//start run;
+	}
+})
 
 </script>
 </html>

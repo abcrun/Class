@@ -7,3 +7,5 @@
 ### Version (0.3.0)
 	* Fixed the bug of prototype chain setting (F.prototype)
 	* Combined Class() and Class.create();
+### Version (0.4.0)
+	* Rebuid the Class (Strict Mode).
