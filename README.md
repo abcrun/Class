@@ -11,19 +11,19 @@ A Simple Way To Create Classes With `extends` In Javascript (OOP)
 ## Define and Usage (用法)
 
 ### Syntax (语法)
-	var klass = Class.create([main[,extends]]) //Create Class
+	var klass = Class.create([constructor[,extends]]) //Create Class
 	klass.extends(extends) //Change the Class's super Class
 	
 ### Parameters (参数)
-###### Class.create([main[,extends]])
-- `main:Optional` -- A function or an object as the constructor. If it is an object, it may have an method `init` as the constructor,and others will be the properties.
+###### Class.create([constructor[,extends]])
+- `constructor:Optional` -- A function or an object as the constructor. If it is an object, it may have an method `init` as the constructor,and others will be the properties.
 - `extends:Optional` -- A function or an object to be inherited as the parent(super Class).
 
 ### Methods (方法)
 - `object.extends(parent)` -- `object` stands for 'Class' means changing the super Class of `object`. `object` stands for 'insatance of Class' means adding properties of `object`.
 
 ### Examples (实例)
-`Class.create([main[,extends]])`
+`Class.create([constructor[,extends]])`
 
 Let's create an Class object called Animal and an Class object Dog which inherits Animal.
 
