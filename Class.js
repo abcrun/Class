@@ -47,11 +47,15 @@
 
 		//Constructor
 		if(_prop) delete _prop.init;
-		var _class = function(){
-			for(var i = 0; i < _constutor.length; i++) _constutor[i].apply(this,arguments);
+		var F = function(){
 			if(_prop) _implement.call(this,_prop);
 		}
-		_class.prototype = _extends;
+		F.prototype = _extends;
+
+		var _class = function(){
+			for(var i = 0; i < _constutor.length; i++) _constutor[i].apply(this,arguments);
+		}
+		_class.prototype = new F();
 
 		//Static Methods
 		_class.extends = function(arg){
