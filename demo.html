@@ -13,21 +13,21 @@
 var Animal = Class.create(function(){
     this.type = 'animal';
 });
-//Dog Class,Animal is the supper Class of Dog
+//Dog Class,Animal is the super Class of Dog
 var Dog = Class.create(
     function(name){
         this.name = name;
     },
     Animal
 );
-//Dog Class,,Animal is the supper Class of Dog
+//Dog Class,,Animal is the super Class of Dog
 var Dog = Class.create({
     init:function(name){
         this.name = name;
     },
 	feet:4
 },Animal);
-//Change the supper Class
+//Change the super Class
 Dog.extends({saying:'wangwang'});
 
 var dog1 = new Dog('doudou');
