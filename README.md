@@ -1,7 +1,7 @@
 # Class.js
 ---
 
-A Simple Way To Create Classes With `extends` In Javascript (OOP)
+A Simple Way To Create Class With `extends` In Javascript (OOP)
 
 基于OOP的Javascipt实现
 
@@ -21,6 +21,8 @@ A Simple Way To Create Classes With `extends` In Javascript (OOP)
 
 ### Methods (方法)
 - `object.extends(parent)` -- `object` stands for 'Class' means changing the super Class of `object`. `object` stands for 'insatance of Class' means adding properties of `object`.
+- `instanceObject.set(name,value)` -- setting the property to the instanced object.
+- `instanceObject.get(name,value)` -- getting the property to the instanced object.
 
 ### Examples (实例)
 `Class.create([constructor[,extends]])`
@@ -50,12 +52,13 @@ The codes `Dog` above is the same as below:
 	)
 	var dog1 = new Dog('doudou');
 	
-We can add properties to the instance of Class `Dog` (`dog1`) with `extends` method.
+We can add properties to the instance of Class `Dog` (`dog1`) with `extends` and `set` method.
 
 	dog1.extends({
 		saying:'wangwang~~',
 		color:'blue'
 	})
+	dog1.set('like','bone');
 
 We can also change the super Class of Dog.
 
