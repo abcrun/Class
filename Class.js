@@ -2,7 +2,6 @@
 * A Simple Way To Create Class With Extends And Implementation In Javascript (OOP)
 * The MIT License - Copyright (c) 2013 Hongbo Yang <abcrun@gmail.com>
 * Repository - https://github.com/abcrun/Class.git
-* Version - 0.4.0
 */
 
 (function(name,factory){
@@ -22,38 +21,49 @@
 		return this;
 	}
 
-	var klass = function(_constutor,_extends){
-		var _prop,constructor_type = type(_constutor),extends_type = type(_extends);
-		var private = {};
+	var klass = function(_constructor,_extends){
+		var _prop,constructor_type = type(_constructor),extends_type = type(_extends),temp = _extends;
 
 		//Format Arguments
-		_constutor = constructor_type == 'function' ? [_constutor] :
-			constructor_type == 'object' ? (_prop = _constutor) && [_constutor['init'] || function(){}] :
+		_constructor = constructor_type == 'function' ? [_constructor] :
+			constructor_type == 'object' ? (_prop = _constructor) && [_constructor['init'] || function(){}] :
 			[function(){}];
-		_extends = extends_type === 'function' ? (_constutor = _constutor.concat(_extends)) && _extends.prototype :
-			extends_type === 'object' ? _extends : null;
+		if(_prop) delete _prop.init;
+
+		_extends = extends_type == 'function' ? (_constructor = _constructor.concat(_extends.constructor || _extends)) && _extends.prototype :
+			extends_type == 'object' ? _extends : null;
 
 		//Prototype Chain
 		_extends = _extends || {};
-		_extends.extends = _extends.extends || _implement;
+		if(!temp || !temp.extends) _extends.extends = _implement;
 
-		//Constructor
-		if(_prop) delete _prop.init;
 		var F = function(){
 			if(_prop) _implement.call(this,_prop);
 		}
 		F.prototype = _extends;
 
+		//Constructor
 		var _class = function(){
-			for(var i = 0; i < _constutor.length; i++) _constutor[i].apply(this,arguments);
+			var length = _constructor.length;
+			for(var i = length - 1; i >= 0; i--) _constructor[i].apply(this,arguments);
 		}
+		_class.constructor = _constructor[0];
 		_class.prototype = new F();
 
-		//Static Methods
 		_class.extends = function(arg){
-			arg.extends = arg.extends || _implement;
+			if(!arg.extends) arg.extends = arg.extends || _implement;
+			_constructor = [this.constructor];
+			this.prototype = arg;
 
-			_class.prototype = arg;
+			if(type(arg) == 'function'){
+				_constructor = _constructor.concat(arg.constructor || arg);
+				this.prototype = arg.prototype;
+			}
+
+			return this;
+		}
+		_class.implements = function(arg){
+			this.prototype = (new F()).extends(arg);
 		}
 
 		return _class;
