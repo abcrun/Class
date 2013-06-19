@@ -20,7 +20,7 @@ A Simple Way To Create Class With `extends` In Javascript (OOP)
 - `extends:Optional` -- A function or an object to be inherited as the parent(super Class).
 
 ### Methods (方法)
-- `object.extends(parent)` -- `object` stands for 'Class' means changing the super Class of `object`. `object` stands for 'insatance of Class' means adding properties of `object`.
+- `object.extends(parent)` -- `Class`: changing the super Class. `instanceObject`: adding properties.
 - `instanceObject.set(name,value)` -- setting the property to the instanced object.
 - `instanceObject.get(name,value)` -- getting the property to the instanced object.
 
