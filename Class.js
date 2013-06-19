@@ -21,16 +21,10 @@
 		for(key in _extends) this[key] = _extends[key];
 		return this;
 	}
-	var _set = function(name,value){
-		this[name] = value;
-		return this;
-	}
-	var _get = function(name){
-		return this[name];
-	}
 
 	var klass = function(_constutor,_extends){
 		var _prop,constructor_type = type(_constutor),extends_type = type(_extends);
+		var private = {};
 
 		//Format Arguments
 		_constutor = constructor_type == 'function' ? [_constutor] :
@@ -41,8 +35,6 @@
 
 		//Prototype Chain
 		_extends = _extends || {};
-		_extends.set = _extends.set || _set;
-		_extends.get = _extends.get || _get;
 		_extends.extends = _extends.extends || _implement;
 
 		//Constructor
@@ -59,8 +51,6 @@
 
 		//Static Methods
 		_class.extends = function(arg){
-			arg.set = arg.set || _set;
-			arg.get = arg.get || _set;
 			arg.extends = arg.extends || _implement;
 
 			_class.prototype = arg;

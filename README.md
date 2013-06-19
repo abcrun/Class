@@ -20,9 +20,8 @@ A Simple Way To Create Class With `extends` In Javascript (OOP)
 - `extends:Optional` -- A function or an object to be inherited as the parent(super Class).
 
 ### Methods (方法)
-- `object.extends(parent)` -- `Class`: changing the super Class. `instanceObject`: adding properties.
-- `instanceObject.set(name,value)` -- setting the property to the instanced object.
-- `instanceObject.get(name,value)` -- getting the property to the instanced object.
+- `Class.extends(parent)` -- Change the super Class.
+- `instancedObject.extends(properties)` -- Add properties.
 
 ### Examples (实例)
 `Class.create([constructor[,extends]])`
@@ -52,13 +51,12 @@ The codes `Dog` above is the same as below:
 	)
 	var dog1 = new Dog('doudou');
 	
-We can add properties to the instance of Class `Dog` (`dog1`) with `extends` and `set` method.
+We can add properties to the instance of Class `Dog` (`dog1`) with `extends` method.
 
 	dog1.extends({
 		saying:'wangwang~~',
 		color:'blue'
 	})
-	dog1.set('like','bone');
 
 We can also change the super Class of Dog.
 
