@@ -26,9 +26,9 @@
 
 		//Format Arguments
 		_constructor = constructor_type == 'function' ? [_constructor] :
-			constructor_type == 'object' ? (_prop = _constructor) && [_constructor['init'] || function(){}] :
+			constructor_type == 'object' ? (_prop = _constructor) && [_constructor['constructor'] || function(){}] :
 			[function(){}];
-		if(_prop) delete _prop.init;
+		if(_prop) delete _prop['constructor'];
 
 		_extends = extends_type == 'function' ? (_constructor = _constructor.concat(_extends.constructor || _extends)) && _extends.prototype :
 			extends_type == 'object' ? _extends : null;
