@@ -105,7 +105,7 @@ Class.js给实例化对象添加了一个方法`.extends` ( **不要和构造类
 
 ### 补充示例
 
-在上面的示例中，创建 **构造类** 时，都用到了`constructor`，在工作中我们可能用不到这个构造方法，所以更常用的可能是如下形式：
+创建 **构造类** 时，当第一个参数是对象时，`constructor`方法并非必须的：
 
 	var Animal = Class.create({
 		type:'animal'
