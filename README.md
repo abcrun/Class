@@ -32,17 +32,17 @@ Class.js是对Javascript面向对象编程的实现，所以我们可以在任�
 
 ###### 创建构造类
 
-	Class.create([constructor[,extends]]);
+	Class.create([constructor[,extended]]);
 
 参数说明:
 
 - `constructor:Optional[function | object]`: 当constructor是一个函数时，它将作为当前类的构造函数；当constructor是一对象时，如果这个对象里面包含constructor方法，那么同样这个方法将会作为当前类的构造函数,而其他的属性或者方法将会作为这个类的内部属性或方法被引用。
-- `extends:Optional[function | object]`: 表示父类，可以是函数也可以是对象。
+- `extended:Optional[function | object]`: 表示父类，可以是函数也可以是对象。
 
 ###### 构造类的方法
 
-	var klass = Class.create([constructor[,extends]]) //如上:创建构造类
-	klass.extends(extends) //设置或改变构造类的父类
+	var klass = Class.create([constructor[,extended]]) //如上:创建构造类
+	klass.extended(extended) //设置或改变构造类的父类
 	klass.implements(properties) //给构造类添加内部属性或方法
 
 以 **快速预览** 为例：
@@ -71,9 +71,9 @@ Class.js是对Javascript面向对象编程的实现，所以我们可以在任�
 		Animal
 	)
 
-我们也可以通过`.extends()`方法改变`Dog`的父类：
+我们也可以通过`.extended()`方法改变`Dog`的父类：
 
-	Dog.extends({
+	Dog.extended({
 		name:'bird',
 		singing:function(){
 			//singing
@@ -90,16 +90,16 @@ Class.js是对Javascript面向对象编程的实现，所以我们可以在任�
 
 ###### 实例化对象的一些方法
 
-Class.js给实例化对象添加了一个方法`.extends` ( **不要和构造类的.extends方法搞混 ** )，用来给当前实例化的对象添加属性或者方法。拿 **快速预览<sup>见上文</sup>** 中的例子为例：
+Class.js给实例化对象添加了一个方法`.extended` ( **不要和构造类的.extended方法搞混 ** )，用来给当前实例化的对象添加属性或者方法。拿 **快速预览<sup>见上文</sup>** 中的例子为例：
 
-	dog1.extends({
+	dog1.extended({
 		color:'yellow',
 		saying:function(){
 			//wangwang~~
 		}
 	})
 
-**Notice**: 切记不要把 **构造类** 和 **实例化对象** 的`.extends`方法混淆。
+**Notice**: 切记不要把 **构造类** 和 **实例化对象** 的`.extended`方法混淆。
 
 ### 补充示例
 
@@ -116,7 +116,7 @@ Class.js给实例化对象添加了一个方法`.extends` ( **不要和构造类
 	},Animal)
 	
 	var dog1 = new Dog();
-	dog1.extends({
+	dog1.extended({
 		name:'doudou'
 	});
 

@@ -10,10 +10,7 @@
 	else this[name] = factory();//Global
 })('Class',function(){
 	var type = function(arg){
-		return arg === null ? 'null' :
-			arg === undefined ? 'undefined' :
-			typeof arg === 'function' ? 'function' :
-			/\s(\w+)/.exec(toString.call(arg).toLowerCase())[1];
+			return /\s(\w+)/.exec(Object.prototype.toString.call(arg).toLowerCase())[1];
 	};
 
 	var _implement = function(_extends){
@@ -35,7 +32,7 @@
 
 		//Prototype Chain
 		_extends = _extends || {};
-		if(!temp || !temp.extends) _extends.extends = _implement;
+		if(!temp || !temp.extended) _extends.extended = _implement;
 
 		var F = function(){
 			if(_prop) _implement.call(this,_prop);
@@ -50,8 +47,8 @@
 		_class.constructor = _constructor[0];
 		_class.prototype = new F();
 
-		_class.extends = function(arg){
-			if(!arg.extends) arg.extends = arg.extends || _implement;
+		_class.extended = function(arg){
+			if(!arg.extended) arg.extended = arg.extended || _implement;
 			_constructor = [this.constructor];
 			this.prototype = arg;
 
@@ -63,7 +60,7 @@
 			return this;
 		}
 		_class.implements = function(arg){
-			this.prototype = (new F()).extends(arg);
+			this.prototype = (new F()).extended(arg);
 		}
 
 		return _class;

@@ -28,11 +28,11 @@ var Dog = Class.create({
 	feet:4
 },Animal);
 //Change the super Class
-Dog.extends({saying:'wangwang'});
+Dog.extended({saying:'wangwang'});
 
 var dog1 = new Dog('doudou');
 //Expands property
-dog1.extends({
+dog1.extended({
 	color:'brown',
 	run:function(){
 		//start run;
