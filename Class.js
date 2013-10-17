@@ -48,7 +48,7 @@
         _class.prototype = new F();
 
         _class.extended = function(arg){
-            if(!arg.extended) arg.extended = arg.extended || _implement;
+            arg.extended = arg.extended || _implement;
             _constructor = [this.constructor];
             this.prototype = arg;
 
