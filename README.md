@@ -43,13 +43,13 @@ Class.js是对Javascript面向对象编程的实现，所以我们可以在任�
 
 	var klass = Class.create([constructor[,extended]]) //如上:创建构造类
 	klass.extended(extended) //设置或改变构造类的父类
-	klass.implements(properties) //给构造类添加内部属性或方法
+	klass.implemented(properties) //给构造类添加内部属性或方法
 
 以 **快速预览** 为例：
 
-我们通过`.implements()`方法给Dog这个构造类添加内部方法:
+我们通过`.implemented()`方法给Dog这个构造类添加内部方法:
 
-	Dog.implements({
+	Dog.implemented({
 		feets:4,
 		playing:function(){
 			//Jump

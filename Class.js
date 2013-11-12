@@ -19,7 +19,7 @@
     }
 
     var klass = function(_constructor,_extends){
-        var _prop,constructor_type = type(_constructor),extends_type = type(_extends),temp = _extends;
+        var _prop,constructor_type = type(_constructor),extends_type = type(_extends);
 
         //Format Arguments
         _constructor = constructor_type == 'function' ? [_constructor] :
@@ -31,8 +31,13 @@
             extends_type == 'object' ? _extends : null;
 
         //Prototype Chain
-        _extends = _extends || {};
-        if(!temp || !temp.extended) _extends.extended = _implement;
+        if(_prop && !_extends){
+            _extends = _prop;
+            _prop = null;
+        }else{
+            _extends = _extends || {};
+        }
+        if(!_extends.extended) _extends.extended = _implement;
 
         var F = function(){
             if(_prop) _implement.call(this,_prop);
@@ -59,7 +64,7 @@
 
             return this;
         }
-        _class.implements = function(arg){
+        _class.implemented = function(arg){
             this.prototype = (new F()).extended(arg);
         }
 
