@@ -2,8 +2,6 @@
 
 Javascript是一种 **面向函数** 基于对象的编程语言，尽管他不像C++,Java等这些语言明确声明面向对象的概念，但是由于Javascript的灵活性，他能够模拟实现面向对象编程的思想。Class.js就是为了解决Javascript面向对象编程而开发的一个Class构造组件。
 
-**Notice**: 下文将会提到 **构造类<sup>见下文</sup>** 和 **实例化对象<sup>见下文</sup>**，这两个概念要区分开。
-
 ###### 快速预览
 
 	var Animal = Class.create(function(){
@@ -36,8 +34,8 @@ Class.js是对Javascript面向对象编程的实现，所以我们可以在任�
 
 参数说明:
 
-- `constructor:Optional[function | object]`: 当constructor是一个函数时，它将作为当前类的构造函数；当constructor是一对象时，如果这个对象里面包含constructor方法，那么同样这个方法将会作为当前类的构造函数,而其他的属性或者方法将会作为这个类的内部属性或方法被引用。
-- `extended:Optional[function | object]`: 表示父类，可以是函数也可以是对象。
+- `constructor:[function | object]`: 当constructor是一个函数时，它将作为当前类的构造函数；当constructor是一对象时，如果这个对象里面包含constructor方法，那么同样这个方法将会作为当前类的构造函数,而其他的属性或者方法将会作为这个类的内部属性或方法被引用。
+- `extended:[function | object]`: 表示父类，可以是函数也可以是对象。
 
 ###### 构造类的方法
 
@@ -123,7 +121,5 @@ Class.js给实例化对象添加了一个方法`.extended` ( **不要和构造�
 这和之前介绍到的示例是一样的。
 
 ### 许可协议
-
-Copyright (c) 2013 Hongbo Yang <abcrun@gmail.com>
 
 The MIT License
